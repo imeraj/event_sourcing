@@ -17,7 +17,6 @@ defmodule FlightTracker.CraftProjector do
     end
   end
 
-
   # Callbacks
   @impl GenStage
   def init(:ok) do
