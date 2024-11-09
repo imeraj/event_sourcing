@@ -1,4 +1,4 @@
-defmodule ProcessManager do
+defmodule BatchProcessManager do
   @moduledoc false
   use GenServer
 
