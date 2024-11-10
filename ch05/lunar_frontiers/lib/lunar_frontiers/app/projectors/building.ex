@@ -1,11 +1,11 @@
-#---
+# ---
 # Excerpted from "Real-World Event Sourcing",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/khpes for more book information.
-#---
+# ---
 defmodule LunarFrontiers.App.Projectors.Building do
   alias LunarFrontiers.App.Events.BuildingSpawned
   alias LunarFrontiers.App.Events.SiteSpawned
@@ -77,13 +77,13 @@ defmodule LunarFrontiers.App.Projectors.Building do
           site_id: site_id,
           site_type: site_type,
           location: location,
-          progressed_ticks: p,
+          completed_ticks: c,
           required_ticks: r
         },
         _metadata
       ) do
     building = %{
-      complete: Float.round(r / p * 100, 1),
+      complete: Float.round(c / r * 100, 1),
       site_id: site_id,
       site_type: site_type,
       location: location
