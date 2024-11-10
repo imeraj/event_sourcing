@@ -71,6 +71,7 @@ defmodule LunarFrontiers.App.Aggregates.ConstructionSite do
       location: loc,
       required_ticks: ticks,
       created_ticks: now_tick,
+      player_id: player_id,
       completed_ticks: 0,
       completed: false
     }
