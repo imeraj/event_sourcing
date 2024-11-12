@@ -25,7 +25,7 @@ defmodule LunarFrontiers.App.Supervisor do
       App.EventHandlers.SystemsTrigger,
 
       # Process Managers
-      # App.ProcessManagers.Construction,
+      App.ProcessManagers.Construction,
 
       # Projectors (read model)
       App.Projectors.Building
