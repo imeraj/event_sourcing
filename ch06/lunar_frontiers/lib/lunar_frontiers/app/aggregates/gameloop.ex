@@ -17,7 +17,7 @@ defmodule LunarFrontiers.App.Aggregates.Gameloop do
   end
 
   # State Mutators
-  def apply(%Gameloop{} = loop, %GameloopAdvanced{} = advance_loop) do
+  def apply(%Gameloop{} = _loop, %GameloopAdvanced{} = advance_loop) do
     %{game_id: id, tick: tick} = advance_loop
 
     %Gameloop{

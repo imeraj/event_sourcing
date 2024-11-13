@@ -8,11 +8,19 @@
 # ---
 import Config
 
-# A completely in-memory (TEST ONLY) event store
 config :lunar_frontiers, LunarFrontiers.App.Application,
   event_store: [
-    adapter: Commanded.EventStore.Adapters.InMemory,
-    serializer: Commanded.Serialization.JsonSerializer
+    adapter: Commanded.EventStore.Adapters.EventStore,
+    event_store: LunarFrontiers.EventStore
   ],
   pubsub: :local,
   registry: :local
+
+config :lunar_frontiers, event_stores: [LunarFrontiers.EventStore]
+
+config :lunar_frontiers, LunarFrontiers.EventStore,
+  serializer: Commanded.Serialization.JsonSerializer,
+  username: "postgres",
+  password: "postgres",
+  database: "eventstore",
+  hostname: "localhost"
