@@ -6,7 +6,7 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/khpes for more book information.
 # ---
-defmodule LunarFrontiers.App.Commands.SpawnSite do
-  @enforce_keys [:site_id]
-  defstruct [:site_id, :game_id, :player_id, :site_type, :completion_ticks, :location, :tick]
+defmodule LunarFrontiers.App.Commands.StartGame do
+  @enforce_keys [:game_id]
+  defstruct [:game_id]
 end

@@ -8,5 +8,5 @@
 # ---
 defmodule LunarFrontiers.App.Events.ConstructionCompleted do
   @derive Jason.Encoder
-  defstruct [:site_id, :site_type, :location, :tick, :player_id]
+  defstruct [:site_id, :site_type, :game_id, :location, :tick, :player_id]
 end

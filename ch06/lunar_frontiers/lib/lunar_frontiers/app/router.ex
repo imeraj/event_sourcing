@@ -8,7 +8,9 @@
 # ---
 defmodule LunarFrontiers.App.Router do
   alias LunarFrontiers.App.Commands.{
+    StartGame,
     AdvanceGameloop,
+    StopGame,
     AdvanceConstruction,
     SpawnSite,
     SpawnBuilding
@@ -37,7 +39,7 @@ defmodule LunarFrontiers.App.Router do
     prefix: "bldg-"
   )
 
-  dispatch([AdvanceGameloop], to: Gameloop)
+  dispatch([StartGame, AdvanceGameloop, StopGame], to: Gameloop)
   dispatch([SpawnSite, AdvanceConstruction], to: ConstructionSite)
   dispatch([SpawnBuilding], to: Building)
 end

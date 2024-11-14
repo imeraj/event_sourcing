@@ -15,6 +15,7 @@ defmodule LunarFrontiers.App.Aggregates.ConstructionSite do
   defstruct [
     :site_id,
     :site_type,
+    :game_id,
     :location,
     :required_ticks,
     :completed_ticks,
@@ -29,6 +30,7 @@ defmodule LunarFrontiers.App.Aggregates.ConstructionSite do
     %{
       site_id: id,
       site_type: type,
+      game_id: game_id,
       completion_ticks: ticks,
       location: loc,
       tick: now_tick,
@@ -38,6 +40,7 @@ defmodule LunarFrontiers.App.Aggregates.ConstructionSite do
     event = %SiteSpawned{
       site_id: id,
       site_type: type,
+      game_id: game_id,
       location: loc,
       tick: now_tick,
       remaining_ticks: ticks,
@@ -102,6 +105,7 @@ defmodule LunarFrontiers.App.Aggregates.ConstructionSite do
     %{
       site_id: id,
       site_type: type,
+      game_id: game_id,
       location: location,
       required_ticks: required_ticks,
       completed_ticks: completed_ticks
@@ -110,6 +114,7 @@ defmodule LunarFrontiers.App.Aggregates.ConstructionSite do
     event = %ConstructionProgressed{
       site_id: id,
       site_type: type,
+      game_id: game_id,
       location: location,
       completed_ticks: completed_ticks + advance_ticks,
       required_ticks: required_ticks,
@@ -123,11 +128,13 @@ defmodule LunarFrontiers.App.Aggregates.ConstructionSite do
 
   defp check_completed(%ConstructionSite{completed_ticks: c, required_ticks: r} = site, tick)
        when c >= r do
-    %{site_id: id, site_type: type, location: location, player_id: player_id} = site
+    %{site_id: id, site_type: type, game_id: game_id, location: location, player_id: player_id} =
+      site
 
     event = %ConstructionCompleted{
       site_id: id,
       site_type: type,
+      game_id: game_id,
       location: location,
       tick: tick,
       player_id: player_id

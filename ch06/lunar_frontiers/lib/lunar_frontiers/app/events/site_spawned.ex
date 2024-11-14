@@ -8,5 +8,5 @@
 # ---
 defmodule LunarFrontiers.App.Events.SiteSpawned do
   @derive Jason.Encoder
-  defstruct [:site_id, :site_type, :location, :tick, :remaining_ticks, :player_id]
+  defstruct [:site_id, :game_id, :site_type, :location, :tick, :remaining_ticks, :player_id]
 end

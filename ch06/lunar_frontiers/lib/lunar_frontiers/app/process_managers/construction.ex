@@ -16,6 +16,7 @@ defmodule LunarFrontiers.App.ProcessManagers.Construction do
   @derive Jason.Encoder
   defstruct [:site_id, :tick_started, :ticks_completed, :ticks_required, :status]
 
+  # Process routing
   def interested?(%SiteSpawned{site_id: site_id}), do: {:start, site_id}
   def interested?(%ConstructionProgressed{site_id: site_id}), do: {:continue, site_id}
   def interested?(%ConstructionCompleted{site_id: site_id}), do: {:continue, site_id}

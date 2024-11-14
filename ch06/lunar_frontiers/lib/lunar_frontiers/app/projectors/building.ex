@@ -22,10 +22,6 @@ defmodule LunarFrontiers.App.Projectors.Building do
     {:ok, config}
   end
 
-  def active_sites() do
-    :ets.tab2list(:sites) |> Enum.map(fn {site_id, _bldg} -> site_id end)
-  end
-
   def handle(
         %SiteSpawned{
           site_id: site_id,
