@@ -14,7 +14,8 @@ defmodule LunarFrontiers.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {App.Supervisor, nil}
+      {App.Supervisor, nil},
+      {Redix, name: :projections}
       # Starts a worker by calling: LunarFrontiers.Worker.start_link(arg)
       # {LunarFrontiers.Worker, arg}
     ]

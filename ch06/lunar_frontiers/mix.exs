@@ -32,7 +32,9 @@ defmodule LunarFrontiers.MixProject do
     [
       {:commanded, "~> 1.4"},
       {:jason, "~> 1.4"},
-      {:commanded_eventstore_adapter, "~> 1.4"}
+      {:uuid, "~> 1.1"},
+      {:commanded_eventstore_adapter, "~> 1.4"},
+      {:redix, "~> 1.1"}
     ]
   end
 end

@@ -16,9 +16,6 @@ defmodule LunarFrontiers.App.Projectors.Building do
     name: __MODULE__
 
   def init(config) do
-    :ets.new(:buildings, [:named_table, :set, :public])
-    :ets.new(:sites, [:named_table, :set, :public])
-
     {:ok, config}
   end
 
@@ -26,20 +23,24 @@ defmodule LunarFrontiers.App.Projectors.Building do
         %SiteSpawned{
           site_id: site_id,
           site_type: site_type,
-          location: location
+          location: location,
+          player_id: player_id
         },
         _metadata
       ) do
-    building = %{
-      complete: 0.0,
-      site_id: site_id,
-      site_type: site_type,
-      location: location,
-      ready: false
-    }
+    building =
+      %{
+        complete: 0.0,
+        site_id: site_id,
+        site_type: site_type,
+        player_id: player_id,
+        location: location,
+        ready: false
+      }
+      |> Jason.encode!()
 
-    :ets.insert(:buildings, {site_id, building})
-    :ets.insert(:sites, {site_id, building})
+    Redix.command(:projections, ["SET", projection_key(site_id), building])
+    Redix.command(:projections, ["SADD", player_site_key(player_id), site_id])
 
     :ok
   end
@@ -53,17 +54,18 @@ defmodule LunarFrontiers.App.Projectors.Building do
         },
         _metadata
       ) do
-    building = %{
-      complete: 100.0,
-      site_id: site_id,
-      site_type: site_type,
-      location: location,
-      player_id: player_id,
-      ready: true
-    }
+    building =
+      %{
+        complete: 100.0,
+        site_id: site_id,
+        site_type: site_type,
+        location: location,
+        player_id: player_id,
+        ready: true
+      }
+      |> Jason.encode!()
 
-    :ets.insert(:buildings, {site_id, building})
-    :ets.delete(:sites, site_id)
+    Redix.command(:projections, ["SET", projection_key(site_id), building])
 
     :ok
   end
@@ -78,15 +80,25 @@ defmodule LunarFrontiers.App.Projectors.Building do
         },
         _metadata
       ) do
-    building = %{
-      complete: Float.round(c / r * 100, 1),
-      site_id: site_id,
-      site_type: site_type,
-      location: location
-    }
+    building =
+      %{
+        complete: Float.round(c / r * 100, 1),
+        site_id: site_id,
+        site_type: site_type,
+        location: location
+      }
+      |> Jason.encode!()
 
-    :ets.insert(:buildings, {site_id, building})
+    Redix.command(:projections, ["SET", projection_key(site_id), building])
 
     :ok
+  end
+
+  defp projection_key(id) do
+    "building:#{id}"
+  end
+
+  defp player_site_key(player_id) do
+    "site:#{player_id}"
   end
 end
