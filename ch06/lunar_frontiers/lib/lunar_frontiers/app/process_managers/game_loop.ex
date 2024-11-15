@@ -63,7 +63,7 @@ defmodule LunarFrontiers.App.ProcessManagers.GameLoop do
     %__MODULE__{
       state
       | current_tick: t,
-        active_construction_sites: state.active_construction_sites -- sid
+        active_construction_sites: state.active_construction_sites -- [sid]
     }
   end
 
