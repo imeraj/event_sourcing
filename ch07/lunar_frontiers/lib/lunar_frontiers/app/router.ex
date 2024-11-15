@@ -12,7 +12,6 @@ defmodule LunarFrontiers.App.Router do
     AdvanceGameloop,
     StopGame,
     AdvanceConstruction,
-    SpawnSite,
     SpawnBuilding
   }
 
@@ -40,6 +39,5 @@ defmodule LunarFrontiers.App.Router do
   )
 
   dispatch([StartGame, AdvanceGameloop, StopGame], to: Gameloop)
-  dispatch([SpawnSite, AdvanceConstruction], to: ConstructionSite)
-  dispatch([SpawnBuilding], to: Building)
+  dispatch([SpawnBuilding.V2, AdvanceConstruction], to: Building)
 end

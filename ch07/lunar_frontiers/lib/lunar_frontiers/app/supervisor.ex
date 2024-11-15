@@ -23,7 +23,6 @@ defmodule LunarFrontiers.App.Supervisor do
 
       # Process Managers
       App.ProcessManagers.GameLoop,
-      App.ProcessManagers.Construction,
 
       # Projectors (read model)
       App.Projectors.Building

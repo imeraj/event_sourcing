@@ -22,7 +22,7 @@ IO.puts "New game #{gid}, going to build site #{sid}"
 dispatch(%Commands.StartGame{game_id: gid})
 dispatch(%Commands.AdvanceGameloop{game_id: gid, tick: 1})
 
-dispatch(%Commands.SpawnSite{
+dispatch(%Commands.SpawnBuilding.V2{
   completion_ticks: 5,
   location: 1,
   player_id: player_id,
